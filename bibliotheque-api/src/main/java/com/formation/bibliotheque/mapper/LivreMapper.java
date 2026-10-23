@@ -22,6 +22,7 @@ public final class LivreMapper {
         livre.setPrix(request.getPrix());
         livre.setAnneePublication(request.getAnneePublication());
         livre.setStock(request.getStock());
+        livre.setAuteurId(request.getAuteurId());
         return livre;
     }
 
