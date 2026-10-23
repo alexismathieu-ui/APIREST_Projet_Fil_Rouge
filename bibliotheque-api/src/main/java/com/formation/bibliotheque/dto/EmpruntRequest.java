@@ -1,19 +1,20 @@
 package com.formation.bibliotheque.dto;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class EmpruntRequest {
 
-    @NotBlank(message = "Le livreId est obligatoire")
-    @Positive(message = "Le livreId ne peut pas être négatif")
+    @NotNull(message = "L'identifiant du livre est obligatoire")
     private Long livreId;
 
     @NotBlank(message = "Le nom de l'emprunteur est obligatoire")
     private String emprunteur;
 
-    @Email @NotBlank(message = "L'email de l'emprunteur est obligatoire")
+    @NotBlank(message = "L'email est obligatoire")
+    @Email(message = "L'email doit être valide")
     private String emailEmprunteur;
 
     public EmpruntRequest() {
@@ -42,5 +43,4 @@ public class EmpruntRequest {
     public void setEmailEmprunteur(String emailEmprunteur) {
         this.emailEmprunteur = emailEmprunteur;
     }
-
 }

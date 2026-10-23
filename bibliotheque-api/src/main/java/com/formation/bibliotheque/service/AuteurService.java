@@ -1,6 +1,7 @@
 package com.formation.bibliotheque.service;
 
 import com.formation.bibliotheque.model.Auteur;
+import com.formation.bibliotheque.model.Livre;
 import com.formation.bibliotheque.repository.AuteurRepository;
 import com.formation.bibliotheque.repository.LivreRepository;
 import org.springframework.data.domain.Page;
@@ -22,12 +23,10 @@ public class AuteurService {
         this.livreRepository = livreRepository;
     }
 
-    //renvoie tout les auteurs
     public Page<Auteur> recupererTous(Pageable pageable) {
         return auteurRepository.findAll(pageable);
     }
 
-    //retourne un auteur par son Id ou retourne
     public Optional<Auteur> recupererParId(Long id) {
         return auteurRepository.findById(id);
     }
@@ -62,6 +61,8 @@ public class AuteurService {
         if (auteurRepository.existsById(id)) {
             auteurRepository.deleteById(id);
         }
-
+    }
+    public Page<Livre> recupererLivres(Long id, Pageable pageable) {
+        return livreRepository.findByAuteurId(id, pageable);
     }
 }

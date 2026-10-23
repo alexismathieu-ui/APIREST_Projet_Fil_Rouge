@@ -1,31 +1,33 @@
 package com.formation.bibliotheque.dto;
 
-import jakarta.validation.constraints.*;
-
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 
 public class LivreRequest {
 
     @NotBlank(message = "Le titre est obligatoire")
-    @Size(max = 100, message = "Le titre ne doit pas dépasser 100 caractères")
+    @Size(max = 200, message = "Le titre ne doit pas dépasser 200 caractères")
     private String titre;
 
-    @NotBlank(message = "L'isbn est obligatoire")
-    @Size(max = 100, message = "L'isbn ne doit pas dépasser 100 caractères")
+    @NotBlank(message = "L'ISBN est obligatoire")
+    @Size(max = 20, message = "L'ISBN ne doit pas dépasser 20 caractères")
     private String isbn;
 
-    @NotBlank(message = "Le prix est obligatoire")
-    @Positive(message = "Le prix ne doit pas être négatif")
+    @NotNull(message = "Le prix est obligatoire")
+    @Positive(message = "Le prix doit être positif")
     private Double prix;
 
-    @Positive(message = "L'année de publication ne doit pas être négatif")
+    @Positive(message = "L'année de publication doit être positive")
     private Integer anneePublication;
 
-    @NotBlank(message = "Le stock est obligatoire")
+    @NotNull(message = "Le stock est obligatoire")
     @PositiveOrZero(message = "Le stock ne peut pas être négatif")
     private Integer stock;
 
-    @NotBlank(message = "L'auteurId est obligatoire")
-    @Positive(message = "L'auteurId ne peut pas être négatif")
+    @NotNull(message = "L'identifiant de l'auteur est obligatoire")
     private Long auteurId;
 
     public LivreRequest() {

@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/v1/auteurs")
+@RequestMapping("/api/v1/auteurs")
 public class AuteurController {
     private AuteurService auteurService;
 
@@ -71,15 +71,15 @@ public class AuteurController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<AuteurResponse> supprimer(@PathVariable Long id){
-        if (!auteurService.existe(id)){
+    public ResponseEntity<Void> supprimer(@PathVariable Long id) {
+        if (!auteurService.existe(id)) {
             return ResponseEntity.notFound().build();
         }
-        if (auteurService.aDesLivres(id)){
+        if (auteurService.aDesLivres(id)) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
         auteurService.supprimer(id);
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
     }
     
     @GetMapping("/{id}/livres")

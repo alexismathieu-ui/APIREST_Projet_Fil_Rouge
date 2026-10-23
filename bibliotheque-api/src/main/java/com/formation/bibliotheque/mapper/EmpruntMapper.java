@@ -6,6 +6,7 @@ import com.formation.bibliotheque.model.Emprunt;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.PagedModel;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,11 +23,20 @@ public final class EmpruntMapper {
     }
 
     public static EmpruntResponse versResponse(Emprunt emprunt) {
+
+        boolean enRetard = Boolean.FALSE.equals(emprunt.getRendu())
+                && emprunt.getDateRetourPrevue() != null
+                && emprunt.getDateRetourPrevue().isBefore(LocalDate.now());
+
         return new EmpruntResponse(
                 emprunt.getId(),
                 emprunt.getLivreId(),
                 emprunt.getEmprunteur(),
-                emprunt.getEmailEmprunteur()
+                emprunt.getDateEmprunt(),
+                emprunt.getDateRetourPrevue(),
+                emprunt.getDateRetourEffective(),
+                emprunt.getRendu(),
+                enRetard
         );
     }
 
