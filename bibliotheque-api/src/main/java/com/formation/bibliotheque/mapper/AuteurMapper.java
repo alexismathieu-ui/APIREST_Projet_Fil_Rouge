@@ -1,9 +1,13 @@
 package com.formation.bibliotheque.mapper;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.formation.bibliotheque.dto.AuteurRequest;
+import com.formation.bibliotheque.dto.AuteurResponse;
+import com.formation.bibliotheque.model.Auteur;
 import org.springframework.data.domain.Page;
 import org.springframework.data.web.PagedModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class AuteurMapper{
     private AuteurMapper(){
