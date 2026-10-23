@@ -55,7 +55,7 @@ public class AuteurService {
     }
 
     public boolean aDesLivres(Long id) {
-        return true;
+        return livreRepository.existsByAuteurId(id);
     }
 
     public void supprimer(Long id) {
