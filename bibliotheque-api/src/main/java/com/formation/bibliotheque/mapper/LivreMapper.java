@@ -17,20 +17,29 @@ public final class LivreMapper {
 
     public static Livre versEntite(LivreRequest request) {
         Livre livre = new Livre();
-        livre.setNom(request.getNom());
+        livre.setTitre(request.getTitre());
+        livre.setIsbn(request.getIsbn());
+        livre.setPrix(request.getPrix());
+        livre.setAnneePublication(request.getAnneePublication());
+        livre.setStock(request.getStock());
         return livre;
     }
 
     public static LivreResponse versResponse(Livre livre) {
         return new LivreResponse(
                 livre.getId(),
-                livre.getNom(),
+                livre.getTitre(),
+                livre.getIsbn(),
+                livre.getPrix(),
+                livre.getAnneePublication(),
+                livre.getStock(),
+                livre.getAuteurId()
         );
     }
 
     public static List<LivreResponse> versResponses(List<Livre> livres) {
         List<LivreResponse> resultat = new ArrayList<>();
-        for (Livre livre livres : livres) {
+        for (Livre livre : livres) {
             resultat.add(versResponse(livre));
         }
         return resultat;
