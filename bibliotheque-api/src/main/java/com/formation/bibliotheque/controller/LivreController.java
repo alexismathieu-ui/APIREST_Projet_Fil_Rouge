@@ -2,6 +2,7 @@ package com.formation.bibliotheque.controller;
 
 import com.formation.bibliotheque.dto.LivreRequest;
 import com.formation.bibliotheque.dto.LivreResponse;
+import com.formation.bibliotheque.mapper.LivreMapper;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -20,23 +21,27 @@ public class LivreController {
     }
 
     @GetMapping
-    public PagedModel<LivreResponse> listerTous(
+    public PagedModel<LivreResponse> listerTous(Pageable pageable) {
         return LivreMapper.versPage(livreService.listerTous(pageable));
-    )
+    }
+
     @GetMapping("/{id}")
     public LivreResponse obtenirParId(@PathVariable Long id){
         return LivreMapper.versResponse(livreService.obtenirParId(id));
     }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public LivreResponse creer(@Valid @RequestBody LivreRequest request){
         return LivreMapper.versResponse(livreService.creer(request));
     }
+
     @PutMapping("/{id}")
     public LivreResponse mettreAJour(@PathVariable long id,
                                      @Valid @RequestBody LivreRequest request){
         return LivreMapper.versResponse(livreService.mettreAJour(id, request));
     }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void supprimer(@PathVariable Long id){
@@ -48,10 +53,12 @@ public class LivreController {
             @PageableDefault(size = 10, sort = "titre") Pageable pageable){
         return LivreMapper.versPage(livreService.rechercher(titre, pageable));
     }
+
     @GetMapping("/disponibles")
     public LivreResponse listerDisponibles(@PageableDefault(size = 10, sort = "titre") Pageable pageable){
         return LivreMapper.versPage(livreService.listerDisponibles(pageable));
     }
+
     @PatchMapping("/{id}/stock")
     public LivreResponse ajouterStock(@PathVariable Long id,
                                       @RequestParam Integer quantite){
