@@ -9,11 +9,9 @@ import jakarta.validation.constraints.Size;
 public class LivreRequest {
 
     @NotBlank(message = "Le titre est obligatoire")
-    @Size(max = 200, message = "Le titre ne doit pas dépasser 200 caractères")
     private String titre;
 
     @NotBlank(message = "L'ISBN est obligatoire")
-    @Size(max = 20, message = "L'ISBN ne doit pas dépasser 20 caractères")
     private String isbn;
 
     @NotNull(message = "Le prix est obligatoire")
