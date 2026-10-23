@@ -1,23 +1,13 @@
 package com.formation.bibliotheque.controller;
 
-import com.formation.bibliotheque.dto.AuteurRequest;
-import com.formation.bibliotheque.dto.AuteurResponse;
 import com.formation.bibliotheque.dto.LivreRequest;
 import com.formation.bibliotheque.dto.LivreResponse;
-import com.formation.bibliotheque.mapper.AuteurMapper;
-import com.formation.bibliotheque.mapper.LivreMapper;
-import com.formation.bibliotheque.model.Auteur;
-import com.formation.bibliotheque.service.AuteurService;
 import jakarta.validation.Valid;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedModel;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/livres")
