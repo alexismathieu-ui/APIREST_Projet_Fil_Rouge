@@ -1,0 +1,542 @@
+{
+  "info": {
+    "name": "Bibliotheque-API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080/api/v1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Auteurs",
+      "item": [
+        {
+          "name": "R01 — GET /auteurs → 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/auteurs"
+          }
+        },
+        {
+          "name": "R02 — GET /auteurs/1 → 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/auteurs/1"
+          }
+        },
+        {
+          "name": "R03 — GET /auteurs/99 → 404",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/auteurs/99"
+          }
+        },
+        {
+          "name": "R04 — POST /auteurs → 201",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Vernes\",\n  \"prenom\": \"Jules\",\n  \"nationalite\": \"Française\"\n}"
+            },
+            "url": "{{baseUrl}}/auteurs"
+          }
+        },
+        {
+          "name": "R05 — POST /auteurs → 400",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"\",\n  \"prenom\": \"Jules\"\n}"
+            },
+            "url": "{{baseUrl}}/auteurs"
+          }
+        },
+        {
+          "name": "R06 — PUT /auteurs/6 → 200",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Verne\",\n  \"prenom\": \"Jules\",\n  \"nationalite\": \"Française\"\n}"
+            },
+            "url": "{{baseUrl}}/auteurs/6"
+          }
+        },
+        {
+          "name": "R07 — PUT /auteurs/99 → 404",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Verne\",\n  \"prenom\": \"Jules\",\n  \"nationalite\": \"Française\"\n}"
+            },
+            "url": "{{baseUrl}}/auteurs/99"
+          }
+        },
+        {
+          "name": "R08 — DELETE /auteurs/1 → 409",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/auteurs/1"
+          }
+        },
+        {
+          "name": "R09 — DELETE /auteurs/5 → 204",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/auteurs/5"
+          }
+        },
+        {
+          "name": "R10 — DELETE /auteurs/5 → 404",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/auteurs/5"
+          }
+        },
+        {
+          "name": "R11 — GET /auteurs/1/livres → 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/auteurs/1/livres"
+          }
+        },
+        {
+          "name": "R12 — GET /auteurs/99/livres → 404",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/auteurs/99/livres"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Livres",
+      "item": [
+        {
+          "name": "R13 — GET /livres?page=0&size=3&sort=prix,desc → 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/livres?page=0&size=3&sort=prix,desc"
+          }
+        },
+        {
+          "name": "R14 — GET /livres/1 → 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/livres/1"
+          }
+        },
+        {
+          "name": "R15 — GET /livres/99 → 404",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/livres/99"
+          }
+        },
+        {
+          "name": "R16 — GET /livres/abc → 400",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/livres/abc"
+          }
+        },
+        {
+          "name": "R17 — POST /livres → 201",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"Vingt Mille Lieues sous les mers\",\n  \"isbn\": \"978-2-253-00631-2\",\n  \"prix\": 7.9,\n  \"anneePublication\": 1870,\n  \"stock\": 2,\n  \"auteurId\": 6\n}"
+            },
+            "url": "{{baseUrl}}/livres"
+          }
+        },
+        {
+          "name": "R18 — POST /livres → 409",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"Vingt Mille Lieues sous les mers\",\n  \"isbn\": \"978-2-253-00631-2\",\n  \"prix\": 7.9,\n  \"anneePublication\": 1870,\n  \"stock\": 2,\n  \"auteurId\": 6\n}"
+            },
+            "url": "{{baseUrl}}/livres"
+          }
+        },
+        {
+          "name": "R19 — POST /livres → 400",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"Livre fantôme\",\n  \"isbn\": \"978-2-0000-0000-1\",\n  \"prix\": 10.0,\n  \"anneePublication\": 2020,\n  \"stock\": 1,\n  \"auteurId\": 99\n}"
+            },
+            "url": "{{baseUrl}}/livres"
+          }
+        },
+        {
+          "name": "R20 — POST /livres → 400",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"\",\n  \"isbn\": \"978-2-0000-0000-2\",\n  \"prix\": -3,\n  \"stock\": 1,\n  \"auteurId\": 1\n}"
+            },
+            "url": "{{baseUrl}}/livres"
+          }
+        },
+        {
+          "name": "R21 — PUT /livres/9 → 200",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"Vingt Mille Lieues sous les mers\",\n  \"isbn\": \"978-2-253-00631-2\",\n  \"prix\": 8.5,\n  \"anneePublication\": 1870,\n  \"stock\": 2,\n  \"auteurId\": 6\n}"
+            },
+            "url": "{{baseUrl}}/livres/9"
+          }
+        },
+        {
+          "name": "R22 — PUT /livres/9 → 409",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"Vingt Mille Lieues sous les mers\",\n  \"isbn\": \"978-2-07-040850-4\",\n  \"prix\": 8.5,\n  \"anneePublication\": 1870,\n  \"stock\": 2,\n  \"auteurId\": 6\n}"
+            },
+            "url": "{{baseUrl}}/livres/9"
+          }
+        },
+        {
+          "name": "R23 — PUT /livres/99 → 404",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titre\": \"Livre inconnu\",\n  \"isbn\": \"978-2-0000-0000-3\",\n  \"prix\": 10.0,\n  \"anneePublication\": 2020,\n  \"stock\": 1,\n  \"auteurId\": 1\n}"
+            },
+            "url": "{{baseUrl}}/livres/99"
+          }
+        },
+        {
+          "name": "R24 — GET /livres/recherche?titre=harry → 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/livres/recherche?titre=harry"
+          }
+        },
+        {
+          "name": "R25 — GET /livres/recherche → 400",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/livres/recherche"
+          }
+        },
+        {
+          "name": "R26 — GET /livres/disponibles → 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/livres/disponibles"
+          }
+        },
+        {
+          "name": "R27 — PATCH /livres/8/stock?quantite=0 → 400",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": "{{baseUrl}}/livres/8/stock?quantite=0"
+          }
+        },
+        {
+          "name": "R28 — PATCH /livres/99/stock?quantite=2 → 404",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": "{{baseUrl}}/livres/99/stock?quantite=2"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Emprunts et fin du scénario",
+      "item": [
+        {
+          "name": "R29 — POST /emprunts → 409",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"livreId\": 8,\n  \"emprunteur\": \"Alice Durand\",\n  \"emailEmprunteur\": \"alice.durand@email.com\"\n}"
+            },
+            "url": "{{baseUrl}}/emprunts"
+          }
+        },
+        {
+          "name": "R30 — POST /emprunts → 400",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"livreId\": 99,\n  \"emprunteur\": \"Alice Durand\",\n  \"emailEmprunteur\": \"alice.durand@email.com\"\n}"
+            },
+            "url": "{{baseUrl}}/emprunts"
+          }
+        },
+        {
+          "name": "R31 — POST /emprunts → 400",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"livreId\": 2,\n  \"emprunteur\": \"Alice Durand\",\n  \"emailEmprunteur\": \"alice.durand\"\n}"
+            },
+            "url": "{{baseUrl}}/emprunts"
+          }
+        },
+        {
+          "name": "R32 — POST /emprunts → 201",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"livreId\": 2,\n  \"emprunteur\": \"Alice Durand\",\n  \"emailEmprunteur\": \"alice.durand@email.com\"\n}"
+            },
+            "url": "{{baseUrl}}/emprunts"
+          }
+        },
+        {
+          "name": "R33 — GET /livres/2 → 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/livres/2"
+          }
+        },
+        {
+          "name": "R34 — GET /emprunts/4 → 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/emprunts/4"
+          }
+        },
+        {
+          "name": "R35 — GET /emprunts/99 → 404",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/emprunts/99"
+          }
+        },
+        {
+          "name": "R36 — GET /emprunts/en-cours → 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/emprunts/en-cours"
+          }
+        },
+        {
+          "name": "R37 — GET /emprunts/en-retard → 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/emprunts/en-retard"
+          }
+        },
+        {
+          "name": "R38 — PATCH /emprunts/2/retour → 200",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": "{{baseUrl}}/emprunts/2/retour"
+          }
+        },
+        {
+          "name": "R39 — PATCH /emprunts/2/retour → 409",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": "{{baseUrl}}/emprunts/2/retour"
+          }
+        },
+        {
+          "name": "R40 — PATCH /emprunts/99/retour → 404",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": "{{baseUrl}}/emprunts/99/retour"
+          }
+        },
+        {
+          "name": "R41 — PATCH /livres/8/stock?quantite=2 → 200",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": "{{baseUrl}}/livres/8/stock?quantite=2"
+          }
+        },
+        {
+          "name": "R42 — POST /emprunts → 201",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"livreId\": 8,\n  \"emprunteur\": \"Paul Morel\",\n  \"emailEmprunteur\": \"paul.morel@email.com\"\n}"
+            },
+            "url": "{{baseUrl}}/emprunts"
+          }
+        },
+        {
+          "name": "R43 — GET /emprunts → 200",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/emprunts"
+          }
+        },
+        {
+          "name": "R44 — DELETE /livres/9 → 204",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/livres/9"
+          }
+        },
+        {
+          "name": "R45 — DELETE /livres/9 → 404",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/livres/9"
+          }
+        },
+        {
+          "name": "R46 — GET /inexistant → 404",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/inexistant"
+          }
+        }
+      ]
+    }
+  ]
+}
