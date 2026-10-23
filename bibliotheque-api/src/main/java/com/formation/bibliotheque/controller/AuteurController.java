@@ -81,8 +81,7 @@ public class AuteurController {
         auteurService.supprimer(id);
         return ResponseEntity.notFound().build();
     }
-
-    /*
+    
     @GetMapping("/{id}/livres")
     public ResponseEntity<org.springframework.data.web.PagedModel<com.formation.bibliotheque.dto.LivreResponse>> listerLivres(
             @PathVariable Long id,
@@ -93,5 +92,4 @@ public class AuteurController {
         org.springframework.data.domain.Page<com.formation.bibliotheque.model.Livre> page = auteurService.recupererLivres(id, pageable);
         return ResponseEntity.ok(com.formation.bibliotheque.mapper.LivreMapper.versPage(page)); // 200
     }
-    */
 }
