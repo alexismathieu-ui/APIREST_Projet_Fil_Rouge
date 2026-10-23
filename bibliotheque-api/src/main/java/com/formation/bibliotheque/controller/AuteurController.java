@@ -24,6 +24,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/auteurs")
+@Tag(name = "Auteurs", description = "Gestion des auteurs")
 public class AuteurController {
     private AuteurService auteurService;
 
@@ -31,12 +32,21 @@ public class AuteurController {
         this.auteurService = auteurService;
     }
 
+    @Operation(summary = "Lister tous les auteurs")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Liste des auteurs récupérée avec succès")
+    })
     @GetMapping
     public ResponseEntity<PagedModel<AuteurResponse>> listerTous(@PageableDefault(size = 10, sort = "nom") Pageable pageable) {
         Page<Auteur> page = auteurService.recupererTous(pageable);
         return ResponseEntity.ok(AuteurMapper.versPage(page)); // 200
     }
 
+    @Operation(summary = "Obtenir un auteur par son ID")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Auteur trouvé"),
+            @ApiResponse(responseCode = "404", description = "Auteur inexistant")
+    })
     @GetMapping("/{id}")
     public ResponseEntity<AuteurResponse> getById(@PathVariable Long id){
         Optional<Auteur> resultat = auteurService.recupererParId(id);
@@ -47,6 +57,11 @@ public class AuteurController {
         return ResponseEntity.ok(AuteurMapper.versResponse(resultat.get()));
     }
 
+    @Operation(summary = "Créer un auteur")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Auteur créé avec succès"),
+            @ApiResponse(responseCode = "400", description = "Données de la requête invalides")
+    })
     @PostMapping
     public ResponseEntity<AuteurResponse> creer(@Valid @RequestBody AuteurRequest request) {
         Auteur auteurACreer = AuteurMapper.versEntite(request);
@@ -56,6 +71,12 @@ public class AuteurController {
                 .body(AuteurMapper.versResponse(auteurCreer));
     }
 
+    @Operation(summary = "Modifier un auteur")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Auteur mis à jour avec succès"),
+            @ApiResponse(responseCode = "400", description = "Données invalides"),
+            @ApiResponse(responseCode = "404", description = "Auteur inexistant")
+    })
     @PutMapping("/{id}")
     public ResponseEntity<AuteurResponse> modifier(@PathVariable Long id, @Valid @RequestBody AuteurRequest request){
         Optional<Auteur> resultat = auteurService.recupererParId(id);
@@ -70,6 +91,12 @@ public class AuteurController {
         return ResponseEntity.ok(AuteurMapper.versResponse(auteurMiseAJour));
     }
 
+    @Operation(summary = "Supprimer un auteur (impossible s'il a encore des livres)")
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", description = "Auteur supprimé"),
+            @ApiResponse(responseCode = "404", description = "Auteur inexistant"),
+            @ApiResponse(responseCode = "409", description = "L'auteur a encore des livres")
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> supprimer(@PathVariable Long id) {
         if (!auteurService.existe(id)) {
@@ -81,7 +108,12 @@ public class AuteurController {
         auteurService.supprimer(id);
         return ResponseEntity.noContent().build();
     }
-    
+
+    @Operation(summary = "Lister les livres d'un auteur")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Liste des livres de l'auteur récupérée avec succès"),
+            @ApiResponse(responseCode = "404", description = "Auteur inexistant")
+    })
     @GetMapping("/{id}/livres")
     public ResponseEntity<org.springframework.data.web.PagedModel<com.formation.bibliotheque.dto.LivreResponse>> listerLivres(
             @PathVariable Long id,

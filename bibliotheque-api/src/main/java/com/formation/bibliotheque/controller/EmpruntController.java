@@ -24,6 +24,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/emprunts")
+@Tag(name = "Emprunts", description = "Emprunts et retours des livres")
 public class EmpruntController {
 
     private final EmpruntService empruntService;
@@ -32,6 +33,10 @@ public class EmpruntController {
         this.empruntService = empruntService;
     }
 
+    @Operation(summary = "Lister tous les emprunts")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Liste de tous les emprunts récupérée avec succès")
+    })
     @GetMapping
     public ResponseEntity<PagedModel<EmpruntResponse>> listerTous(
             @PageableDefault(size = 10, sort = "dateEmprunt") Pageable pageable) {
@@ -39,6 +44,11 @@ public class EmpruntController {
         return ResponseEntity.ok(EmpruntMapper.versPage(page));
     }
 
+    @Operation(summary = "Obtenir un emprunt par son ID")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Emprunt trouvé"),
+            @ApiResponse(responseCode = "404", description = "Emprunt inexistant")
+    })
     @GetMapping("/{id}")
     public ResponseEntity<EmpruntResponse> obtenirParId(@PathVariable Long id) {
 
@@ -50,6 +60,12 @@ public class EmpruntController {
         return ResponseEntity.ok(EmpruntMapper.versResponse(resultat.get()));
     }
 
+    @Operation(summary = "Créer un emprunt")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Emprunt créé avec succès"),
+            @ApiResponse(responseCode = "400", description = "Requête invalide ou livre inexistant"),
+            @ApiResponse(responseCode = "409", description = "Livre non disponible (stock insuffisant)")
+    })
     @PostMapping
     public ResponseEntity<EmpruntResponse> creer(@Valid @RequestBody EmpruntRequest request) {
 
@@ -70,6 +86,12 @@ public class EmpruntController {
                 .body(EmpruntMapper.versResponse(empruntCree));
     }
 
+    @Operation(summary = "Enregistrer le retour d'un livre emprunté")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Livre retourné avec succès"),
+            @ApiResponse(responseCode = "404", description = "Emprunt inexistant"),
+            @ApiResponse(responseCode = "409", description = "L'emprunt a déjà été rendu")
+    })
     @PatchMapping("/{id}/retour")
     public ResponseEntity<EmpruntResponse> retourner(@PathVariable Long id) {
         // 1. Vérifier :
@@ -89,6 +111,10 @@ public class EmpruntController {
         return ResponseEntity.ok(EmpruntMapper.versResponse(empruntRendu));
     }
 
+    @Operation(summary = "Lister les emprunts en cours")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Liste des emprunts en cours récupérée avec succès")
+    })
     @GetMapping("/en-cours")
     public ResponseEntity<PagedModel<EmpruntResponse>> listerEnCours(
             @PageableDefault(size = 10, sort = "dateEmprunt") Pageable pageable) {
@@ -96,6 +122,10 @@ public class EmpruntController {
         return ResponseEntity.ok(EmpruntMapper.versPage(page));
     }
 
+    @Operation(summary = "Lister les emprunts en retard")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Liste des emprunts en retard récupérée avec succès")
+    })
     @GetMapping("/en-retard")
     public ResponseEntity<PagedModel<EmpruntResponse>> listerEnRetard(
             @PageableDefault(size = 10, sort = "dateEmprunt") Pageable pageable) {
