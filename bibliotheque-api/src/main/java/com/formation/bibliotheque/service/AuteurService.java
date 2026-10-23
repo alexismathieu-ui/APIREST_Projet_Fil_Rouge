@@ -22,21 +22,19 @@ public class AuteurService {
         this.livreRepository = livreRepository;
     }
 
-    // Écrivez ici les méthodes du tableau
-
     //renvoie tout les auteurs
     public Page<Auteur> recupererTous(Pageable pageable) {
-        return AuteurRepository.findAll();
+        return auteurRepository.findAll(pageable);
     }
 
     //retourne un auteur par son Id ou retourne
     public Optional<Auteur> recupererParId(Long id) {
-        return AuteurRepository.findById();
+        return auteurRepository.findById(id);
     }
 
     //
     public boolean existe(Long id) {
-        if (AuteurRepository.existsById(id)) {
+        if (auteurRepository.existsById(id)) {
             return true;
         }
         else {
@@ -46,18 +44,14 @@ public class AuteurService {
 
     public Auteur creer(Auteur auteur) {
         auteur.setId(null);
-        return AuteurRepository.save();
+        return auteurRepository.save(auteur);
     }
 
     public Auteur mettreAJour(Auteur auteurExistant, Auteur nouvellesValeurs) {
-        return AuteurRepository.findById(id)
-                .map(produitExistant -> {
-                    produitExistant.setNom(nouvellesValeurs.getNom());
-                    produitExistant.setDescription(nouvellesValeurs.getDescription());
-                    produitExistant.setPrix(nouvellesValeurs.getPrix());
-                    produitExistant.setStock(nouvellesValeurs.getStock());
-                    return AuteurRepository.save(produitExistant);
-                });
+        auteurExistant.setNom(nouvellesValeurs.getNom());
+        auteurExistant.setPrenom(nouvellesValeurs.getPrenom());
+        auteurExistant.setNationalite(nouvellesValeurs.getNationalite());
+        return auteurRepository.save(auteurExistant);
     }
 
     public boolean aDesLivres(Long id) {
@@ -65,8 +59,8 @@ public class AuteurService {
     }
 
     public void supprimer(Long id) {
-        if (AuteurRepository.existsById(id)) {
-            AuteurRepository.deleteById(id);
+        if (auteurRepository.existsById(id)) {
+            auteurRepository.deleteById(id);
         }
 
     }

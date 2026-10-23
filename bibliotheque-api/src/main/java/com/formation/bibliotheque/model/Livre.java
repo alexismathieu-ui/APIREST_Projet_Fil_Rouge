@@ -36,18 +36,18 @@ public class Livre {
     private Integer stock;
 
     @Column(nullable = false)
-    private Long idauteur;
+    private Long auteurId;
 
     public Livre() {
     }
 
-    public Livre(String titre, String isbn, Double prix, Integer anneePublication, Integer stock, Long idauteur) {
+    public Livre(String titre, String isbn, Double prix, Integer anneePublication, Integer stock, Long auteurId) {
         this.titre = titre;
         this.isbn = isbn;
         this.prix = prix;
         this.anneePublication = anneePublication;
         this.stock = stock;
-        this.idauteur = idauteur;
+        this.auteurId = auteurId;
     }
 
     public Long getId() {
@@ -86,14 +86,14 @@ public class Livre {
     public void setStock(Integer  stock) {
         this.stock = stock;
     }
-    public Long getIdauteur() {
-        return idauteur;
+    public Long getAuteurId() {
+        return auteurId;
     }
-    public void setIdauteur(Long  idauteur) {
-        this.idauteur = idauteur;
+    public void setAuteurId(Long  auteurid) {
+        this.auteurId = auteurid;
     }
     @Override
     public String toString() {
-        return "Livre{id=" + id + ", titre='" + titre + "', isbn=" + isbn + ", prix=" + prix + ", anneePublication= " + anneePublication + ", stock=" + stock + " , idauteur= " + idauteur +"}";
+        return "Livre{id=" + id + ", titre='" + titre + "', isbn=" + isbn + ", prix=" + prix + ", anneePublication= " + anneePublication + ", stock=" + stock + " , auteurid= " + auteurId +"}";
     }
 }
