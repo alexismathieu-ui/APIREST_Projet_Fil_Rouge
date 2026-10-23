@@ -57,7 +57,7 @@ public class EmpruntService {
 
     public Emprunt retourner(Emprunt emprunt) {
         emprunt.setRendu(true);
-        emprunt.setDateRetourPrevue(LocalDate.now());
+        emprunt.setDateRetourEffective(LocalDate.now());
 
         Optional<Livre> livreExiste = livreRepository.findById(emprunt.getLivreId());
         if(livreExiste.isPresent()){

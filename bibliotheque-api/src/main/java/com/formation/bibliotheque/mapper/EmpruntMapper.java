@@ -17,6 +17,7 @@ public final class EmpruntMapper {
 
     public static Emprunt versEntite(EmpruntRequest request) {
         Emprunt emprunt = new Emprunt();
+        emprunt.setLivreId(request.getLivreId());
         emprunt.setEmprunteur(request.getEmprunteur());
         emprunt.setEmailEmprunteur(request.getEmailEmprunteur());
         return emprunt;
